@@ -8,7 +8,7 @@ const port = 3000;
 app.get('/', (req: Request, res: Response) => {
     res
         .status(200)
-        .json('<h1>HELLO VLADIK!!!!</h1>>');
+        .json('HELLO VLADIK!!!!');
 })
 
 
