@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import express from 'express';
 import { setupApp } from './setup-app';
 
 const app = express();
