@@ -1,11 +1,11 @@
-import express, {Router, Request, Response} from "express";
+import express, {Request, Response} from "express";
 import {db} from "../../db/in-memory.db";
 import {vehicleInputDtoValidation} from "../validation/vehicleInputDtoValidation";
 import {createErrorMessages} from "../../core/utils/error.utils";
 import {Driver} from "../types/types";
 
 
-export const driversRouter = Router({});
+export const driversRouter = express.Router({});
 
 driversRouter
     .get('', (req: Request, res: Response) => {
