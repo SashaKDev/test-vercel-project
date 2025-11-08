@@ -5,6 +5,13 @@
   "repository": "git@github.com:SashaKDev/test-vercel-project.git",
   "author": "Alexander <sasha.kozel252000@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "watch": "tsc -w",
+    "dev": "nodemon --inspect dist/index.js",
+    "jest": "jest -i",
+    "lint": "eslint --fix .",
+    "format": "prettier --write ."
+  },
   "dependencies": {
     "express": "^5.1.0"
   },
