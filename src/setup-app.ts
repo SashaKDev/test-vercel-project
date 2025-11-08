@@ -1,7 +1,8 @@
 import express, {Express, Request, Response} from 'express';
 import {db} from "./db/in-memory.db";
 import {Driver, VehicleFeature} from "./drivers/types/types";
-import {DriverInputDto} from "./drivers/dto/driver.input-dto";
+import {vehicleInputDtoValidation} from "./drivers/validation/vehicleInputDtoValidation";
+import {createErrorMessages} from "./core/utils/error.utils";
 
 export const setupApp = (app: Express) => {
 
@@ -18,7 +19,7 @@ export const setupApp = (app: Express) => {
             .json(db.drivers);
 
     });
-    app.get('/drivers/:id', (req: Request<{id:string}, Driver>, res: Response<Driver | null>) => {
+    app.get('/drivers/:id', (req: Request, res: Response) => {
         const foundDriver = db.drivers.find(d => d.id === +req.params.id);
 
         if (!foundDriver) {
@@ -30,7 +31,17 @@ export const setupApp = (app: Express) => {
             .status(200)
             .json(foundDriver);
     });
-    app.post('/drivers', (req: Request<{}, Driver, DriverInputDto>, res: Response<Driver>) => {
+    app.post('/drivers', (req: Request, res: Response) => {
+
+        const errors = vehicleInputDtoValidation(req.body);
+
+        if (errors.length > 0) {
+            res
+                .status(400)
+                .json(createErrorMessages(errors));
+            return;
+        }
+
         const newDriver: Driver = {
             id: db.drivers.length ? db.drivers.length + 1 : 1,
             name: req.body.name,
