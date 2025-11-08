@@ -6,7 +6,11 @@ export const setupApp = (app: Express) => {
 
     app.use(express.json());
 
-    app.get("/", (req: Request, res: Response) => {})
+    app.get("/", (req: Request, res: Response) => {
+        res
+            .status(200)
+            .json({message: 'Hello World!'});
+    })
 
     app.use('/drivers', driversRouter);
     app.use('/testing', testingRouter);
