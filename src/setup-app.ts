@@ -1,7 +1,7 @@
 import express, {Express, Request, Response} from 'express';
 import {driversRouter} from "./drivers/routers/drivers.router";
 import {testingRouter} from "./testing/routers/testing.router";
-import {setupSwagger} from "./core/swagger/setup-swagger";
+import {DRIVERS_PATH, TESTING_PATH} from "./core/paths/paths";
 
 export const setupApp = (app: Express) => {
 
@@ -13,9 +13,8 @@ export const setupApp = (app: Express) => {
             .json({message: 'Hello World!'});
     })
 
-    app.use('/api/drivers', driversRouter);
-    app.use('/api/testing', testingRouter);
+    app.use(DRIVERS_PATH, driversRouter);
+    app.use(TESTING_PATH, testingRouter);
 
-    setupSwagger(app);
     return app;
 }
