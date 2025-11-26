@@ -3,6 +3,7 @@ import {vehicleInputDtoValidation} from "../../validation/vehicleInputDtoValidat
 import {createErrorMessages} from "../../../core/utils/error.utils";
 import {Driver} from "../../types/types";
 import {db} from "../../../db/in-memory.db";
+import {driversRepository} from "../../repositories/drivers.repository";
 
 export const createDriverHandler = (req: Request,  res: Response) => {
     const errors = vehicleInputDtoValidation(req.body);
@@ -28,7 +29,7 @@ export const createDriverHandler = (req: Request,  res: Response) => {
         createdAt: new Date()
     }
 
-    db.drivers.push(newDriver);
+    driversRepository.create(newDriver);
     res
         .status(201)
         .json(newDriver);
