@@ -14,6 +14,7 @@ export const setupApp = (app: Express) => {
     })
 
     app.use(DRIVERS_PATH, driversRouter);
+
     app.use(TESTING_PATH, testingRouter);
 
     return app;
